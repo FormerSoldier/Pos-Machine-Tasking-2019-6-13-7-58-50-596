@@ -21,7 +21,7 @@ it('should return "[ERROR]: the barcode is not exist" when call isValidBarcodes 
 });
 
 it('should return "[{id:0001,count:1},{id:0003,count:2}]" when call statisticsByBarcode given allItems, ["0001","0003","0003"]',() =>{
-    expect(obj.statisticsByBarcode(['0001', '0003', '0003'])).toBe('[{id:"0001",count:1},{id:"0003",count:2}]');
+    expect(obj.statisticsByBarcode(['0001', '0003', '0003'])).toBe('[{id:0001,count:1},{id:0003,count:2}]');
 });
 
 it('should return \nReceipts\n'+
@@ -38,4 +38,20 @@ it('should return \nReceipts\n'+
     'Dr Pepper                       7          1\n'+
     '------------------------------------------------------------\n'+
     'Price: 20');
+});
+
+it('should return \nReceipts\n'+
+"------------------------------------------------------------\n"+
+"Coca Cola                       3          1\n"+
+"Pepsi-Cola                      5          2\n"+
+"Dr Pepper                       7          1\n"+
+"------------------------------------------------------------\n"+
+'Price: 20\n when call statisticsByBarcode given allItems, [{id:0004,count:10},{id:0010,count:5},{id:0005,count:1}]',() =>{
+    expect(obj.createReceipts(allItems, [{id:'0004',count:10},{id:'0010',count:5},{id:'0005',count:1}])).toBe('Receipts\n'+
+    '------------------------------------------------------------\n'+
+    'Mountain Dew                    6         10\n'+
+    'Dr Pepper                       7          1\n'+
+    'Fanta                          12          5\n'+ 
+    '------------------------------------------------------------\n'+
+    'Price: 127');
 });
