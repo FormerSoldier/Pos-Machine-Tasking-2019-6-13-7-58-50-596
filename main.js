@@ -1,32 +1,40 @@
 function isValidBarcodes(allItems, barcodes){
+    let result = undefined;
+    let contain = false;
     barcodes.forEach(function(barcode){
         allItems.forEach(function(item){
-            if(barcode != item['id'])
-                return "[ERROR]: the barcode is not exist";
+            if(barcode == item['id']){
+                contain = true;   
+                return ;
+            }                        
         });
+        if(!contain)
+            result =  "[ERROR]: the barcode is not exist";
+        contain = false;
     });
+    return result;
 }
 
-function statisticsByBarcode(validBarcodes){
+function statisticsByBarcode(barcodes){
     let statisticsBarcodes = [];
     let isContain = false;
-    for(let i = 0; i  < validBarcodes.length; i++){
+    for(let i = 0; i  < barcodes.length; i++){
         for(let j = 0; j < statisticsBarcodes.length; j++){
-            if(statisticsBarcodes[j]['id'] === validBarcodes[i]){
+            if(statisticsBarcodes[j]['id'] === barcodes[i]){
                 isContain = true;
                 statisticsBarcodes[j]['count'] += 1;
                 break;
             }
         }
         if(!isContain)
-            statisticsBarcodes.push({id:validBarcodes[i],count:1});
+            statisticsBarcodes.push({id:barcodes[i],count:1});
         isContain = false;
     }
     return statisticsBarcodes;
 }
 
 function createReceipts(allItems, statisticsBarcodes){
-    let sum = 0;
+    var sum = 0;
     let str = undefined;
     let receipts = 'Receipts\n'+
     '------------------------------------------------------------\n';
@@ -44,7 +52,7 @@ function createReceipts(allItems, statisticsBarcodes){
         });
     });
     receipts += '------------------------------------------------------------\n'+
-            'Price: '+sum;
+            'Price: '+ sum;
     return receipts;
 }
 
@@ -53,3 +61,10 @@ function printReceipt(allItems, barcodes){
     let statisticsBarcodes = statisticsByBarcode(barcodes);
     createReceipts(allItems,statisticsBarcodes);
 }
+
+module.exports = {
+    isValidBarcodes,
+    statisticsByBarcode,
+    createReceipts,
+    printReceipt
+};
