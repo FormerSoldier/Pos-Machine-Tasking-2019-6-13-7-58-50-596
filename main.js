@@ -1,12 +1,10 @@
-function getValidBarcodes(allItems, barcodes){
-    let validBarcodes = [];
+function isValidBarcodes(allItems, barcodes){
     barcodes.forEach(function(barcode){
         allItems.forEach(function(item){
-            if(barcode == item['id'])
-                validBarcodes.push(barcode);
+            if(barcode != item['id'])
+                return "[ERROR]: the barcode is not exist";
         });
     });
-    return validBarcodes;
 }
 
 function statisticsByBarcode(validBarcodes){
@@ -48,4 +46,10 @@ function createReceipts(allItems, statisticsBarcodes){
     receipts += '------------------------------------------------------------\n'+
             'Price: '+sum;
     return receipts;
+}
+
+function printReceipt(allItems, barcodes){
+    isValidBarcodes(allItems, barcodes);
+    let statisticsBarcodes = statisticsByBarcode(barcodes);
+    createReceipts(allItems,statisticsBarcodes);
 }
