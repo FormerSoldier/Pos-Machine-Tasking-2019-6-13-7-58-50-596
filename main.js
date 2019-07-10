@@ -1,4 +1,4 @@
-function isValidBarcodes(allItems, barcodes){
+var isValidBarcodes = (allItems, barcodes) => {
     let result = undefined;
     let contain = false;
     barcodes.forEach(function(barcode){
@@ -15,7 +15,7 @@ function isValidBarcodes(allItems, barcodes){
     return result;
 }
 
-function statisticsByBarcode(barcodes){
+var statisticsByBarcode = (barcodes) => {
     let statisticsBarcodes = [];
     let isContain = false;
     for(let i = 0; i  < barcodes.length; i++){
@@ -33,30 +33,23 @@ function statisticsByBarcode(barcodes){
     return statisticsBarcodes;
 }
 
-function createReceipts(allItems, statisticsBarcodes){
+var createReceipts = (allItems, statisticsBarcodes) => {
     var sum = 0;
-    let str = undefined;
     let receipts = 'Receipts\n'+
     '------------------------------------------------------------\n';
     allItems.forEach(function(item){
         statisticsBarcodes.forEach(function(statisticsBarcode){
             if(statisticsBarcode['id'] == item['id']){
-                str = '                                            ';
-                str = item['name'] + str.substring(item['name'].length, (33-item['price'].toString().length))
-                    + item['price']
-                    + str.substring(33, (44 - statisticsBarcode['count'].toString().length)) + statisticsBarcode['count']
-                    + '\n';
-                receipts += str;
+                receipts += `${item['name']}  ${item['price']} ${statisticsBarcode['count']}\n`;
                 sum += statisticsBarcode['count']*item['price'];
             }
         });
     });
-    receipts += '------------------------------------------------------------\n'+
-            'Price: '+ sum;
+    receipts += `------------------------------------------------------------\nPrice: ${sum}`;
     return receipts;
 }
 
-function printReceipt(allItems, barcodes){
+var printReceipt = (allItems, barcodes) => {
     isValidBarcodes(allItems, barcodes);
     let statisticsBarcodes = statisticsByBarcode(barcodes);
     return createReceipts(allItems,statisticsBarcodes);

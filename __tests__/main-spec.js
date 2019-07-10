@@ -29,32 +29,32 @@ it('should return "[{id:0001,count:1},{id:0003,count:2}]" when call statisticsBy
 // the test cases for function 
 it('should return \nReceipts\n'+
 "------------------------------------------------------------\n"+
-"Coca Cola                       3          1\n"+
-"Pepsi-Cola                      5          2\n"+
-"Dr Pepper                       7          1\n"+
+"Coca Cola  3 1\n"+
+"Pepsi-Cola  5 2\n"+
+"Dr Pepper  7 1\n"+
 "------------------------------------------------------------\n"+
 'Price: 20\n when call statisticsByBarcode given allItems, [{id:0001,count:1},{id:0003,count:2},{id:0005,count:1}]',() =>{
     expect(obj.createReceipts(allItems, [{id:'0001',count:1},{id:'0003',count:2},{id:'0005',count:1}])).toBe('Receipts\n'+
     '------------------------------------------------------------\n'+
-    'Coca Cola                       3          1\n'+
-    'Pepsi-Cola                      5          2\n'+
-    'Dr Pepper                       7          1\n'+
+    'Coca Cola  3 1\n'+
+    'Pepsi-Cola  5 2\n'+
+    'Dr Pepper  7 1\n'+
     '------------------------------------------------------------\n'+
     'Price: 20');
 });
 
 it('should return \nReceipts\n'+
 "------------------------------------------------------------\n"+
-"Mountain Dew                    6         10\n"+
-"Dr Pepper                       7          1\n"+
-"Fanta                          12          5\n"+
+"Mountain Dew  6 10\n"+
+"Dr Pepper  7 1\n"+
+"Fanta  12 5\n"+
 "------------------------------------------------------------\n"+
-'Price: 20\n when call statisticsByBarcode given allItems, [{id:0004,count:10},{id:0010,count:5},{id:0005,count:1}]',() =>{
+'Price: 127\n when call statisticsByBarcode given allItems, [{id:0004,count:10},{id:0010,count:5},{id:0005,count:1}]',() =>{
     expect(obj.createReceipts(allItems, [{id:'0004',count:10},{id:'0010',count:5},{id:'0005',count:1}])).toBe('Receipts\n'+
     '------------------------------------------------------------\n'+
-    'Mountain Dew                    6         10\n'+
-    'Dr Pepper                       7          1\n'+
-    'Fanta                          12          5\n'+ 
+    'Mountain Dew  6 10\n'+
+    'Dr Pepper  7 1\n'+
+    'Fanta  12 5\n'+ 
     '------------------------------------------------------------\n'+
     'Price: 127');
 });
@@ -62,16 +62,16 @@ it('should return \nReceipts\n'+
 //the test cases for function printReceipt
 it('should return \nReceipts\n'+
 "------------------------------------------------------------\n"+
-"Mountain Dew                    6          2\n"+
-"Dr Pepper                       7          1\n"+
-"Fanta                          12          1\n"+
+"Mountain Dew  6 2\n"+
+"Dr Pepper  7 1\n"+
+"Fanta  12 1\n"+
 "------------------------------------------------------------\n"+
 'Price: 31\n when call printReceipt given allItems, []',() =>{
     expect(obj.printReceipt(allItems,['0004','0004','0005','0010'])).toBe('Receipts\n'+
     '------------------------------------------------------------\n'+
-    'Mountain Dew                    6          2\n'+
-    'Dr Pepper                       7          1\n'+
-    'Fanta                          12          1\n'+ 
+    'Mountain Dew  6 2\n'+
+    'Dr Pepper  7 1\n'+
+    'Fanta  12 1\n'+ 
     '------------------------------------------------------------\n'+
     'Price: 31');
 });
