@@ -59,7 +59,7 @@ function createReceipts(allItems, statisticsBarcodes){
 function printReceipt(allItems, barcodes){
     isValidBarcodes(allItems, barcodes);
     let statisticsBarcodes = statisticsByBarcode(barcodes);
-    createReceipts(allItems,statisticsBarcodes);
+    return createReceipts(allItems,statisticsBarcodes);
 }
 
 module.exports = {
